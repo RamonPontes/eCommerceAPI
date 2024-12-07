@@ -1,4 +1,7 @@
 package com.ramon.eCommerceAPI.repository;
 
-public class ProductRepository {
+import com.ramon.eCommerceAPI.model.Product;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface ProductRepository extends JpaRepository<Product, Integer> {
 }
