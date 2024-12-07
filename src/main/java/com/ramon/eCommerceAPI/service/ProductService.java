@@ -21,4 +21,8 @@ public class ProductService {
     public Optional<Product> getProductWithId(int id) {
         return productRepository.findById(id);
     }
+
+    public Product createdProduct(Product product) {
+        return productRepository.save(product);
+    }
 }

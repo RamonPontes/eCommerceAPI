@@ -20,6 +20,13 @@ public class ProductController {
         return ResponseEntity.status(200).body(productService.getAllProducts());
     }
 
+    @PostMapping
+    private ResponseEntity<?> createdProduct(@RequestBody Product productData) {
+        if (productData.isAnyFieldNull()) { return ResponseEntity.status(400).body("All fields are required"); }
+
+        return ResponseEntity.status(200).body(productService.createdProduct(productData));
+    }
+
     @GetMapping("/{id}")
     private ResponseEntity<?> getProductWithId(@PathVariable int id) {
         if (id < 0) {
