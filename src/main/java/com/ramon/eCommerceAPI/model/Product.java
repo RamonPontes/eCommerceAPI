@@ -1,5 +1,6 @@
 package com.ramon.eCommerceAPI.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -62,5 +63,10 @@ public class Product {
 
     public void setPrice(Float price) {
         this.price = price;
+    }
+
+    @JsonIgnore
+    public boolean isAnyFieldNull() {
+        return getName() == null || getDescription() == null || getPrice() == null || getCategory_id() < 0 || getStock() < 0;
     }
 }
