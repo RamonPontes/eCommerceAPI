@@ -1,0 +1,10 @@
+CREATE DATABASE `eCommerce`
+
+CREATE TABLE `products` (
+	`id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+	`name` VARCHAR(255) NOT NULL,
+	`description` VARCHAR(255) NOT NULL,
+	`price` FLOAT NOT NULL,
+	`category_id` INT DEFAULT NULL,
+	`stock` INT NOT NULL
+);
