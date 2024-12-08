@@ -54,4 +54,19 @@ public class ProductController {
             return ResponseEntity.status(200).body(productService.editProduct(productData, id));
         }
     }
+
+    @DeleteMapping("/{id}")
+    private ResponseEntity<?> deleteProduct(@PathVariable int id) {
+        if (id < 0) { return ResponseEntity.status(400).body("Invalid id"); }
+
+        Optional<Product> product = productService.getProductWithId(id);
+
+        if (product.isEmpty()) {
+            return ResponseEntity.status(404).body("Product not found");
+        } else {
+            productService.deleteProduct(id);
+
+            return ResponseEntity.status(200).body("Product deleted");
+        }
+    }
 }
