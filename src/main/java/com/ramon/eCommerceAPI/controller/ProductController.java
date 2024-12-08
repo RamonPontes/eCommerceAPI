@@ -29,9 +29,7 @@ public class ProductController {
 
     @GetMapping("/{id}")
     private ResponseEntity<?> getProductWithId(@PathVariable int id) {
-        if (id < 0) {
-            return ResponseEntity.status(400).body("Invalid id");
-        }
+        if (id < 0) { return ResponseEntity.status(400).body("Invalid id");}
 
         Optional<Product> product = productService.getProductWithId(id);
 
@@ -39,6 +37,21 @@ public class ProductController {
             return ResponseEntity.status(404).body("Product not found");
         } else {
             return ResponseEntity.status(200).body(product);
+        }
+    }
+
+    @PutMapping("/{id}")
+    private ResponseEntity<?> editProduct(@RequestBody Product productData, @PathVariable int id) {
+        if (id < 0) { return ResponseEntity.status(400).body("Invalid id"); }
+
+        if (productData.isAnyFieldNull()) { return ResponseEntity.status(400).body("All fields are required"); }
+
+        Optional<Product> product = productService.getProductWithId(id);
+
+        if (product.isEmpty()) {
+            return ResponseEntity.status(404).body("Product not found");
+        } else {
+            return ResponseEntity.status(200).body(productService.editProduct(productData, id));
         }
     }
 }

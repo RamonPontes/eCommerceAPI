@@ -25,4 +25,10 @@ public class ProductService {
     public Product createdProduct(Product product) {
         return productRepository.save(product);
     }
+
+    public Product editProduct(Product product, int id) {
+        product.setId(id);
+
+        return productRepository.save(product);
+    }
 }
